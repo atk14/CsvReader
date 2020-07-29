@@ -101,12 +101,9 @@ class CsvReader extends \ArrayIterator {
 			it's not error when the field is not present, only when there is and is empty */
 		);
 
+
 		if($options['delimiter'] === null) {
-			if(preg_match('/[,;]/', $data, $matches)) {
-				$options['delimiter'] = $matches[0];
-			} else {
-				$options['delimiter'] = ',';
-			}
+			$options['delimiter'] = self::DetermineDelimitier($data);
 		}
 
 		if($options['quote'] === null) {
@@ -122,6 +119,34 @@ class CsvReader extends \ArrayIterator {
 		}
 
 		return $options;
+	}
+
+	static function DetermineDelimitier($data) {
+		$delimitiers = array(",",";","\t","|");
+
+		$counters = str_split(str_repeat("0",sizeof($delimitiers)),1); // array("0","0", ...);
+		$lines = explode("\n",$data);
+		$lines_count = sizeof($lines);
+
+		foreach($lines as $line){
+			foreach($delimitiers as $k => $d){
+				if(!is_bool(strpos($line,$d))){
+					$counters[$k]++;
+				}
+			}
+		}
+
+		$max = 0;
+		$delimitier = null;
+		foreach($delimitiers as $k => $d){
+			if($max<$counters[$k]){
+				$max = $counters[$k];
+				$delimitier = $d;
+			}
+		}
+		if(!is_null($delimitier)){ return $delimitier; }
+		
+		return $delimitiers[0]; // default
 	}
 
 	/**

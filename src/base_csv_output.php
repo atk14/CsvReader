@@ -6,9 +6,9 @@ namespace CsvReader;
  */
 class BaseCsvOutput extends \FilterIterator {
 
-	function __construct($csvimport) {
-		$this->csv = $csvimport;
-		parent::__construct($csvimport);
+	function __construct($csv_reader) {
+		$this->csv = $csv_reader;
+		parent::__construct($csv_reader);
 	}
 
 	function accept() {

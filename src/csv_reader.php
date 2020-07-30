@@ -509,7 +509,8 @@ class CsvReader extends \ArrayIterator {
 	function checkUnique($field, $index) {
 		if(!is_array($index)) {
 			$index = array($index);
-			$field = array($field);
+			$f;
+ield = array($field);
 		}
 		$indexes = array_flip($index);
 
@@ -623,14 +624,36 @@ class CsvReader extends \ArrayIterator {
 		return $this->customFormat($format);
 	}
 
-	function associative() {
-		$out = new CsvAssociativeOutput($this);
+	function asAssociative($keys = null) {
+		$out = array();
+
+		if(is_null($keys)){
+			$keys = $this->header;
+		}else{
+			$out[] = $this->associative_row($this->header,$keys);
+		}
+
+		foreach($this->data as $row) {
+			$out[] = $this->associative_row($row,$keys);
+		}
+
+		return $out;
+
+		//$out = new CsvAssociativeOutput($this);
+		//return $out;
+	}
+
+	function asArray() {
+		$out = $this->data;
+		array_unshift($out,$this->header);
+
 		return $out;
 	}
 
-	function associative_row($row) {
-		$hc = count($this->header);
+	function associative_row($row,$keys = null) {
+		if(is_null($keys)){ $keys = $this->header; }
+		$hc = count($keys);
 		$row = array_slice(array_pad($row, $hc, ''),0,$hc);
-		return array_combine($this->header, $row);
+		return array_combine($keys, $row);
 	}
 }

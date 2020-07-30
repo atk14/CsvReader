@@ -509,8 +509,7 @@ class CsvReader extends \ArrayIterator {
 	function checkUnique($field, $index) {
 		if(!is_array($index)) {
 			$index = array($index);
-			$f;
-ield = array($field);
+			$field = array($field);
 		}
 		$indexes = array_flip($index);
 

@@ -149,6 +149,18 @@ class CsvReader extends \ArrayIterator {
 		return $delimitiers[0]; // default
 	}
 
+	function getHeader(){
+		return $this->header;
+	}
+
+	function getColumnCount(){
+		return sizeof($this->getHeader());
+	}
+
+	function getTotalRowCount(){
+		return sizeof($this->data) + 1;
+	}
+
 	/**
 	 * Returns given row or cell if ($col !== null) of parsed data.
 	 * Indexed from zero, errorneous rows has no number.
@@ -646,6 +658,15 @@ class CsvReader extends \ArrayIterator {
 		$out = $this->data;
 		array_unshift($out,$this->header);
 
+		return $out;
+	}
+
+	function getColumn($index){
+		$out = array();
+		$out[] = isset($this->header[$index]) ? $this->header[$index] : "";
+		foreach($this->data as $row){
+			$out[] = isset($row[$index]) ? $row[$index] : "";
+		}
 		return $out;
 	}
 

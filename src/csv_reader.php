@@ -50,7 +50,7 @@ namespace CsvReader;
  * Never create the class by constructor, use CsvImport::FromFile and CsvImport::FromData static methods.
  **/
 
-class CsvReader extends \ArrayIterator {
+class CsvReader {
 
 	protected $headerIndex = 0;
 

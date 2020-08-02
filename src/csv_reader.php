@@ -52,8 +52,6 @@ namespace CsvReader;
 
 class CsvReader {
 
-	protected $headerIndex = 0;
-
 	/**
 	 * Import from given file
 	 **/
@@ -130,8 +128,8 @@ class CsvReader {
 		return $delimitiers[0]; // default
 	}
 
-	function getHeader(){
-		return $this->data[$this->headerIndex];
+	function getHeader($header_line = 0){
+		return $this->data[$header_line];
 	}
 
 	function getColumnCount(){
@@ -153,34 +151,60 @@ class CsvReader {
 		$options += array(
 			'delimiter' => ',',
 			'quote' => '"',
-			'header_index' => 0,
 			'lower_header_names' => false,
 			'trim_header_names' => true,
 		);
 
 		$this->options = $options;
-		$this->errors = array();
 
 		$this->readBody($stream);
 	}
 
-	function getAssociativeRows($keys = null) {
+	/**
+	 *
+	 *	$data = $reader->getAssociativeRows();
+	 *	$data = $reader->getAssociativeRows(["header_line" => 2]); // 3rd line, countring from 0
+	 *	$data = $reader->getAssociativeRows(["keys" => ["name","email","city"]]);
+	 *	$data = $reader->getAssociativeRows(["keys" => ["name","email","city"],"offset" => 1]);
+	 */
+	function getAssociativeRows($options = array()) {
+		$options += array(
+			"keys" => null, // ["key1","key2","key3", ...]
+		);
+		$keys = $options["keys"];
+
+		$options += array(
+			"header_line" => is_null($keys) ? 0 : null,
+		);
+		$header_line = $options["header_line"];
+
+		$options += array(
+			"offset" => is_null($header_line) ? 0 : ($header_line + 1)
+		);
+		$offset = $options["offset"];
+
+		$header_line = $options["header_line"];
+
 		$out = array();
 
 		if(is_null($keys)){
-			$keys = $this->getHeader();
-		}else{
-			$out[] = $this->toAssociativeRow($this->getHeader(),$keys);
+			$keys = $this->getHeader($header_line);
 		}
 
-		for($i=$this->headerIndex+1;$i<sizeof($this->data);$i++){
+		for($i=$offset;$i<sizeof($this->data);$i++){
 			$out[] = $this->toAssociativeRow($this->data[$i],$keys);
 		}
 
 		return $out;
 	}
 
-	function getRows() {
+	function getRows($options = array()) {
+		$options += array(
+			"offset" => 0,
+		);
+		if($options["offset"]>0){
+			return array_slice($this->data,$options["offset"]);
+		}
 		return $this->data;
 	}
 

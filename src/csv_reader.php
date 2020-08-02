@@ -162,8 +162,6 @@ class CsvReader {
 		$this->errors = array();
 
 		$this->readBody($stream);
-
-		parent::__construct($this->data);
 	}
 
 	function asAssociative($keys = null) {

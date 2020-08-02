@@ -43,6 +43,11 @@ class TcCsvReader extends TcBase {
 			array("f1" => "v3")
 		),$rows);
 
+		$this->assertEquals(array("k1","k2"),$reader->getRow(0));
+		$this->assertEquals(array("v1","v2"),$reader->getRow(1));
+		$this->assertEquals(array("v3","v4"),$reader->getRow(2));
+		$this->assertEquals(array(),$reader->getRow(3));
+
 		$this->assertEquals(array("k1","v1","v3"),$reader->getColumn(0));
 		$this->assertEquals(array("k2","v2","v4"),$reader->getColumn(1));
 		$this->assertEquals(array("","",""),$reader->getColumn(2));

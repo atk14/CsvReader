@@ -661,6 +661,15 @@ class CsvReader extends \ArrayIterator {
 		return $out;
 	}
 
+	function getRow($index){
+		$index = (int)$index;
+		if($index==0){
+			return $this->header;
+		}
+		$index--;
+		return isset($this->data[$index]) ? $this->data[$index] : array();
+	}
+
 	function getColumn($index){
 		$out = array();
 		$out[] = isset($this->header[$index]) ? $this->header[$index] : "";

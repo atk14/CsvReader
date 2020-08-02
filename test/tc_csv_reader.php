@@ -4,7 +4,7 @@ class TcCsvReader extends TcBase {
 	function test(){
 		$reader = CsvReader::FromData("k1;k2\nv1;v2\nv3;v4");
 
-		$this->assertEquals(2,$reader->getColumnCount());
+		$this->assertEquals(2,$reader->getTotalColumnCount());
 		$this->assertEquals(3,$reader->getTotalRowCount());
 
 		// getHeader()
@@ -87,12 +87,12 @@ class TcCsvReader extends TcBase {
 		$this->assertEquals(array("k1","k2"),$reader->getRow(0));
 		$this->assertEquals(array("v1","v2"),$reader->getRow(1));
 		$this->assertEquals(array("v3","v4"),$reader->getRow(2));
-		$this->assertEquals(array(),$reader->getRow(3));
+		$this->assertEquals(null,$reader->getRow(3));
 
 		// getColumn()
 		$this->assertEquals(array("k1","v1","v3"),$reader->getColumn(0));
 		$this->assertEquals(array("k2","v2","v4"),$reader->getColumn(1));
-		$this->assertEquals(array("","",""),$reader->getColumn(2));
+		$this->assertEquals(null,$reader->getColumn(2));
 	}
 
 	function test_DetermineDelimitier(){

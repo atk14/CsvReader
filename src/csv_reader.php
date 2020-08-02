@@ -130,7 +130,7 @@ class CsvReader {
 		return $this->data[$header_line];
 	}
 
-	function getColumnCount(){
+	function getTotalColumnCount(){
 		return sizeof($this->getHeader());
 	}
 
@@ -211,14 +211,24 @@ class CsvReader {
 		if($index==0){
 			return $this->getHeader();
 		}
-		return isset($this->data[$index]) ? $this->data[$index] : array();
+		return isset($this->data[$index]) ? $this->data[$index] : null;
 	}
 
-	function getColumn($index){
+	function getColumn($index,$options = array()){
+		$options += array(
+			"offset" => 0,
+		);
+
+		if($index>$this->getTotalColumnCount()-1){
+			return null;
+		}
+
 		$out = array();
 		foreach($this->data as $row){
 			$out[] = isset($row[$index]) ? $row[$index] : "";
 		}
+		
+		$out = array_slice($out,$options["offset"]);
 		return $out;
 	}
 
@@ -231,11 +241,19 @@ class CsvReader {
 
 	/** Read body of csv file**/
 	protected function readBody($stream) {
+		$column_count = 0;
 		$this->data = array();
 		while(!feof($stream)) {
 			$line = $this->readline($stream);
 			if($line) {
 				$this->data[] = $line;
+				$column_count = max($column_count,sizeof($line));
+			}
+		}
+
+		foreach($this->data as $k => $line){
+			if(sizeof($line)<$column_count){
+				$this->data[$k] = array_pad($line, $column_count, '');
 			}
 		}
 	}

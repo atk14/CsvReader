@@ -60,7 +60,7 @@ class CsvReader {
 	static function FromFile($filename, $options = array()) {
 		$f = fopen($filename, 'r');
 		if(!$f) {
-			throw new Exception("Bad file $filename");
+			throw new \Exception("Bad file $filename");
 		}
 		$options = static::DetermineOptions(file_get_contents($filename), $options);
 		return new static($f, $options);
@@ -164,7 +164,7 @@ class CsvReader {
 		$this->readBody($stream);
 	}
 
-	function asAssociative($keys = null) {
+	function getAssociativeRows($keys = null) {
 		$out = array();
 
 		if(is_null($keys)){
@@ -180,7 +180,7 @@ class CsvReader {
 		return $out;
 	}
 
-	function asArray() {
+	function getRows() {
 		return $this->data;
 	}
 

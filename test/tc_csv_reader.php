@@ -9,34 +9,34 @@ class TcCsvReader extends TcBase {
 
 		$this->assertEquals(array("k1","k2"),$reader->getHeader());
 
-		$rows = $reader->asArray();
+		$rows = $reader->getRows();
 		$this->assertEquals(array(
 			array("k1", "k2"),
 			array("v1", "v2"),
 			array("v3", "v4"),
 		),$rows);
 
-		$rows = $reader->asAssociative();
+		$rows = $reader->getAssociativeRows();
 		$this->assertEquals(array(
 			array("k1" => "v1", "k2" => "v2"),
 			array("k1" => "v3", "k2" => "v4")
 		),$rows);
 
-		$rows = $reader->asAssociative(array("f1","f2"));
+		$rows = $reader->getAssociativeRows(array("f1","f2"));
 		$this->assertEquals(array(
 			array("f1" => "k1", "f2" => "k2"),
 			array("f1" => "v1", "f2" => "v2"),
 			array("f1" => "v3", "f2" => "v4")
 		),$rows);
 
-		$rows = $reader->asAssociative(array("f1","f2","f3"));
+		$rows = $reader->getAssociativeRows(array("f1","f2","f3"));
 		$this->assertEquals(array(
 			array("f1" => "k1", "f2" => "k2", "f3" => ""),
 			array("f1" => "v1", "f2" => "v2", "f3" => ""),
 			array("f1" => "v3", "f2" => "v4", "f3" => "")
 		),$rows);
 
-		$rows = $reader->asAssociative(array("f1"));
+		$rows = $reader->getAssociativeRows(array("f1"));
 		$this->assertEquals(array(
 			array("f1" => "k1"),
 			array("f1" => "v1"),

@@ -68,6 +68,13 @@ z1
 			array("k1" => "z1", "k2" => "", "k3" => ""),
 		),$rows);
 
+		$rows = $reader->getAssociativeRows(array("header_line" => 1));
+		$this->assertEquals(array(
+			array("v1" => "x1", "v2" => "x2", "v3" => "x3"),
+			array("v1" => "y1", "v2" => "y2", "v3" => ""),
+			array("v1" => "z1", "v2" => "", "v3" => ""),
+		),$rows);
+
 		$rows = $reader->getAssociativeRows(array("keys" => array("f1","f2","f3")));
 		$this->assertEquals(array(
 			array("f1" => "k1", "f2" => "k2", "f3" => "k3"),

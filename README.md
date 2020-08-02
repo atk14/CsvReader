@@ -14,7 +14,8 @@ Basic usage
     $csv_data = trim($csv_data);
 
     $reader = CsvReader::FromData($csv_data);
-    // $reader = CsvReader::FromFile("path/to/file.csv");
+    // or
+    $reader = CsvReader::FromFile("path/to/file.csv");
     
     $reader->getTotalRowCount(); // 5
     $reader->getTotalColumnCount(); // 3
@@ -59,6 +60,13 @@ Basic usage
     //  ["k1" => "x1", "k1" => "x2", "k3" => "x3"],
     //  ["k1" => "y1", "k1" => "y2", "k3" => ""],
     //  ["k1" => "z1", "k1" => "", "k3" => ""],
+    // ]
+
+    $rows = $reader->getAssociativeRows(["header_line" => 1]); // counting from 0, so this is the 2nd line
+    // [
+    //  ["v1" => "x1", "v1" => "x2", "v3" => "x3"],
+    //  ["v1" => "y1", "v1" => "y2", "v3" => ""],
+    //  ["v1" => "z1", "v1" => "", "v3" => ""],
     // ]
 
     $rows = $reader->getAssociativeRows(["keys" => ["f1","f2","f3"]]);

@@ -1,6 +1,4 @@
 <?php
-namespace CsvReader;
-
 /**
  * Class for importing CSV.
  *

@@ -2,7 +2,7 @@
 class TcCsvReader extends TcBase {
 
 	function test(){
-		$reader = CsvReader\CsvReader::FromData("k1;k2\nv1;v2\nv3;v4");
+		$reader = CsvReader::FromData("k1;k2\nv1;v2\nv3;v4");
 
 		$this->assertEquals(2,$reader->getColumnCount());
 		$this->assertEquals(3,$reader->getTotalRowCount());
@@ -96,20 +96,20 @@ class TcCsvReader extends TcBase {
 	}
 
 	function test_DetermineDelimitier(){
-		$this->assertEquals(';',CsvReader\CsvReader::DetermineDelimitier("a;b\nc;d"));
-		$this->assertEquals(',',CsvReader\CsvReader::DetermineDelimitier("a,b\nc,d"));
-		$this->assertEquals('|',CsvReader\CsvReader::DetermineDelimitier("a|b\nc|d"));
-		$this->assertEquals("\t",CsvReader\CsvReader::DetermineDelimitier("a\tb\nc\td"));
+		$this->assertEquals(';',CsvReader::DetermineDelimitier("a;b\nc;d"));
+		$this->assertEquals(',',CsvReader::DetermineDelimitier("a,b\nc,d"));
+		$this->assertEquals('|',CsvReader::DetermineDelimitier("a|b\nc|d"));
+		$this->assertEquals("\t",CsvReader::DetermineDelimitier("a\tb\nc\td"));
 
-		$this->assertEquals(';',CsvReader\CsvReader::DetermineDelimitier("a;b\nc\nd;e"));
-		$this->assertEquals(',',CsvReader\CsvReader::DetermineDelimitier("a,b\nc\nd;e"));
+		$this->assertEquals(';',CsvReader::DetermineDelimitier("a;b\nc\nd;e"));
+		$this->assertEquals(',',CsvReader::DetermineDelimitier("a,b\nc\nd;e"));
 
-		$this->assertEquals(',',CsvReader\CsvReader::DetermineDelimitier("no delimitier"));
-		$this->assertEquals(',',CsvReader\CsvReader::DetermineDelimitier(""));
+		$this->assertEquals(',',CsvReader::DetermineDelimitier("no delimitier"));
+		$this->assertEquals(',',CsvReader::DetermineDelimitier(""));
 	}
 
 	function test_exchange_rate(){
-		$reader = CsvReader\CsvReader::FromFile(__DIR__ . "/files/denni_kurz.txt");
+		$reader = CsvReader::FromFile(__DIR__ . "/files/denni_kurz.txt");
 
 		$data = $reader->getAssociativeRows(array("header_line" => 1));
 		$this->assertEquals(33,sizeof($data));

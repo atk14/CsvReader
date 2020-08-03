@@ -130,11 +130,11 @@ class CsvReader {
 		return $this->data[$header_line];
 	}
 
-	function getTotalColumnCount(){
+	function getColumnCount(){
 		return sizeof($this->getHeader());
 	}
 
-	function getTotalRowCount(){
+	function getRowCount(){
 		return sizeof($this->data);
 	}
 
@@ -219,7 +219,7 @@ class CsvReader {
 			"offset" => 0,
 		);
 
-		if($index>$this->getTotalColumnCount()-1){
+		if($index>$this->getColumnCount()-1){
 			return null;
 		}
 

@@ -13,8 +13,8 @@ z1
 
     $reader = CsvReader::FromData($csv_data);
 
-		$this->assertEquals(3,$reader->getTotalColumnCount());
-		$this->assertEquals(5,$reader->getTotalRowCount());
+		$this->assertEquals(3,$reader->getColumnCount());
+		$this->assertEquals(5,$reader->getRowCount());
 
     $rows = $reader->getRows();
 		$this->assertEquals(array(

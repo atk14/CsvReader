@@ -17,8 +17,8 @@ Basic usage
     // or
     $reader = CsvReader::FromFile("path/to/file.csv");
     
-    $reader->getTotalRowCount(); // 5
-    $reader->getTotalColumnCount(); // 3
+    $reader->getRowCount(); // 5
+    $reader->getColumnCount(); // 3
 
     $rows = $reader->getRows();
     // [

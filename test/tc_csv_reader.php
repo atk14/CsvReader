@@ -4,8 +4,8 @@ class TcCsvReader extends TcBase {
 	function test(){
 		$reader = CsvReader::FromData("k1;k2\nv1;v2\nv3;v4");
 
-		$this->assertEquals(2,$reader->getTotalColumnCount());
-		$this->assertEquals(3,$reader->getTotalRowCount());
+		$this->assertEquals(2,$reader->getColumnCount());
+		$this->assertEquals(3,$reader->getRowCount());
 
 		// getHeader()
 		$this->assertEquals(array("k1","k2"),$reader->getHeader());

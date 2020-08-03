@@ -1,6 +1,8 @@
 CsvReader
 =========
 
+Reads CSV data from a file or a string. Detects automatically CSV format parameters.
+
 Basic usage
 -----------
 
@@ -84,6 +86,22 @@ Basic usage
     //  ["f1" => "y1", "k1" => "y2", "k3" => ""],
     //  ["f1" => "z1", "k1" => "", "k3" => ""],
     // ]
+
+CSV format parameters auto-detection
+------------------------------------
+
+The CsvReader detects format parameters automatically. If the auto-detection fails, format parameters can be specified explicitly.
+
+
+    $reader = CsvReader::FromData($csv_data,[
+      "delimiter" => ";",
+      "quote" => "'"
+    ]);
+    // or
+    $reader = CsvReader::FromFile("path/to/file.csv",[
+      "delimiter" => ";",
+      "quote" => "'"
+    ]);
 
 Installation
 ------------

@@ -1,51 +1,8 @@
 <?php
 /**
- * Class for importing CSV.
+ * Reads CSV data from a file or a string. Detects automatically CSV format parameters.
  *
- * Usage:
- *
- * ```
- * $import = CsvImport::FromFile($filename, array(
- * 	'format' => array('id' => integer, 'created_at' => 'date')
- * )
- * );
- * ```
- *
- * Process each row
- * ```
- * foreach($import as $row) {
- * 	echo $row[0], $row[1], ...
- * }
- * ```
- *
- * ```
- * foreach($import->associative() as $row) {
- * 	echo $row['id'], $row['catalog_id'], ...
- * }
- *
- * foreach($import->formated('db') as $row) {
- * 	Record::CreateNewRecord($row->associative())
- * }
- *
- * foreach($import->formated('view') as $row) {
- * 	//vytiskni radku tabulky
- * }
- * ```
- *
- * Errors checking
- * ```
- * $import->hasError(); //are there errors during import?
- * $import->hasError(1); /are there errors on second line of data (first has row_number 0)
- * $import->hasError(CsvImport::HEADER); //are there errors in CSV header (unallowed field, etc...?)
- * $import->hasError(1,'id'); //are there errors on second line on field 'id'?
- * $import->hasError(1,2); //are there errors on second line in second field
- * ```
- *
- * $import->getError();	//returns array of lines, where are errors. Each line is represented by
- * array, where nonnegative keys are index of errors related to given fields (by its index),
- * negative keys denotes errors related to whole row.
- *
- * Never create the class by constructor, use CsvImport::FromFile and CsvImport::FromData static methods.
+ * See README.md
  **/
 
 class CsvReader {

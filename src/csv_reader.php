@@ -56,7 +56,8 @@ class CsvReader {
 	}
 
 	static function DetermineDelimitier($data) {
-		$delimitiers = array(",",";","\t","|");
+		$default_delimitier = ",";
+		$delimitiers = array("\t",",",";","|"); // tab is more preferable delimiter than comma
 
 		$counters = str_split(str_repeat("0",sizeof($delimitiers)),1); // array("0","0", ...);
 		$lines = explode("\n",$data);
@@ -80,7 +81,7 @@ class CsvReader {
 		}
 		if(!is_null($delimitier)){ return $delimitier; }
 		
-		return $delimitiers[0]; // default
+		return $default_delimitier; // default
 	}
 
 	function getHeader($header_line = 0){

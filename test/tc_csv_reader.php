@@ -104,6 +104,8 @@ class TcCsvReader extends TcBase {
 		$this->assertEquals(';',CsvReader::DetermineDelimitier("a;b\nc\nd;e"));
 		$this->assertEquals(',',CsvReader::DetermineDelimitier("a,b\nc\nd;e"));
 
+		$this->assertEquals("\t",CsvReader::DetermineDelimitier("01\tapple, red"));
+
 		$this->assertEquals(',',CsvReader::DetermineDelimitier("no delimitier"));
 		$this->assertEquals(',',CsvReader::DetermineDelimitier(""));
 	}

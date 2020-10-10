@@ -1,6 +1,8 @@
 CsvReader
 =========
 
+[![Build Status](https://travis-ci.org/atk14/CsvReader.svg?branch=master)](https://travis-ci.org/atk14/CsvReader)
+
 Reads CSV data from a file or a string. Detects automatically CSV format parameters.
 
 Basic usage
@@ -106,7 +108,7 @@ The CsvReader detects format parameters automatically. If the auto-detection fai
 Installation
 ------------
 
-    composer require atk14/cvs-reader dev-master
+    composer require atk14/cvs-reader
 
 Testing
 -------

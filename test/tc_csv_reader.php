@@ -114,7 +114,13 @@ class TcCsvReader extends TcBase {
 
 	function test_empty_input(){
 		$reader = CsvReader::FromData("");
+		$this->_test_empty_input($reader);
 
+		$reader = CsvReader::FromFile(__DIR__ . "/files/empty_file.csv");
+		$this->_test_empty_input($reader);
+	}
+
+	function _test_empty_input($reader){
 		$this->assertEquals(0,$reader->getColumnCount());
 		$this->assertEquals(0,$reader->getRowCount());
 

@@ -85,7 +85,7 @@ class CsvReader {
 	}
 
 	function getHeader($header_line = 0){
-		return $this->data[$header_line];
+		return isset($this->data[$header_line]) ? $this->data[$header_line] : array();
 	}
 
 	function getColumnCount(){

@@ -95,6 +95,23 @@ class TcCsvReader extends TcBase {
 		$this->assertEquals(null,$reader->getColumn(2));
 	}
 
+	function test_getColumnCount(){
+		$reader = CsvReader::FromData("a;b\nc;d\ne;f");
+		$this->assertEquals(2,$reader->getColumnCount());
+
+		$reader = CsvReader::FromData("a;b;x\nc;d\ne;f");
+		$this->assertEquals(3,$reader->getColumnCount());
+
+		$reader = CsvReader::FromData("a;b\nc;d;x;x\ne;f");
+		$this->assertEquals(4,$reader->getColumnCount());
+
+		$reader = CsvReader::FromData(" ");
+		$this->assertEquals(1,$reader->getColumnCount());
+
+		$reader = CsvReader::FromData("");
+		$this->assertEquals(0,$reader->getColumnCount());
+	}
+
 	function test_DetermineDelimitier(){
 		$this->assertEquals(';',CsvReader::DetermineDelimitier("a;b\nc;d"));
 		$this->assertEquals(',',CsvReader::DetermineDelimitier("a,b\nc,d"));

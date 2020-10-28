@@ -56,7 +56,7 @@ Basic usage
     // ["k3","v3","x3","",""],
 
     $col = $reader->getColumn(3);
-    // null
+    // []
 
     $rows = $reader->getAssociativeRows();
     // [

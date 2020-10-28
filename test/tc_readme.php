@@ -58,7 +58,7 @@ z1
 		,$col);
 
     $col = $reader->getColumn(3);
-		$this->assertEquals(null,$col);
+		$this->assertEquals(array(),$col);
 
 		$rows = $reader->getAssociativeRows();
 		$this->assertEquals(array(

@@ -178,7 +178,7 @@ class CsvReader {
 		);
 
 		if($index>$this->getColumnCount()-1){
-			return null;
+			return array();
 		}
 
 		$out = array();

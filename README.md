@@ -116,4 +116,9 @@ Testing
     composer update --dev
     ./vendor/bin/run_unit_tests test
 
+License
+-------
+
+CsvReader is free software distributed [under the terms of the MIT license](http://www.opensource.org/licenses/mit-license)
+
 [//]: # ( vim: set ts=2 et: )

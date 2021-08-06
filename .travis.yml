@@ -2,19 +2,17 @@
 os: linux
 
 # Partner Queue Solution, no credits are consumed
-arch: ppc64le
+#arch: ppc64le
+# ... but on the ppc64le, testing in PHP5.4 and PHP5.5 is not possible
+arch: amd64
 
 dist: xenial
 
 language: php
 
 php:
-  - 5.6
-  - 7.0
-  - 7.1
-  - 7.2
-  - 7.4
-  - nightly
+  - 5.4
+  - 5.5
 
 before_install:
   - composer update --dev

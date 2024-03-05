@@ -16,6 +16,13 @@ class CsvReader {
 			throw new \Exception("Bad file $filename");
 		}
 		$options = static::DetermineOptions(file_get_contents($filename), $options);
+
+		// skipping BOM
+		$bom = fread($f,3);
+		if(!in_array($bom,array("\xEF\xBB\xBF"))){
+			fseek($f,0);
+		}
+
 		return new static($f, $options);
 	}
 
@@ -23,6 +30,11 @@ class CsvReader {
 	 * Import from given string
 	 **/
 	static function FromData($data, $options = array()) {
+		// skipping BOM
+		if(in_array(substr($data,0,3),array("\xEF\xBB\xBF"))){
+			$data = substr($data,3);
+		}
+
 		$stream = fopen('php://temp','r+');
 		fwrite($stream, $data);
 		rewind($stream);

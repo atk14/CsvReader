@@ -185,4 +185,25 @@ class TcCsvReader extends TcBase {
 		),$data[32]);
 	}
 
+	function test_csv_with_bom(){
+		$reader = CsvReader::FromFile(__DIR__ . "/files/file_with_bom.csv");
+		$data = $reader->getAssociativeRows();
+		$this->assertEquals(array(
+			'Registrační číslo' => 'MK130',
+			'Název 1' => 'Kartáč MK 130 Profi',
+			'Výrobní číslo' => '000/0000',
+			'Rok výroby' => '',
+			'Číslo motoru' => '',
+		),$data[0]);
+
+		$reader = CsvReader::FromData(file_get_contents(__DIR__ . "/files/file_with_bom.csv"));
+		$data = $reader->getAssociativeRows();
+		$this->assertEquals(array(
+			'Registrační číslo' => 'MK130',
+			'Název 1' => 'Kartáč MK 130 Profi',
+			'Výrobní číslo' => '000/0000',
+			'Rok výroby' => '',
+			'Číslo motoru' => '',
+		),$data[0]);
+	}
 }

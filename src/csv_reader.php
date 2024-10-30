@@ -7,6 +7,9 @@
 
 class CsvReader {
 
+	protected $options;
+	protected $data;
+
 	/**
 	 * Import from given file
 	 **/

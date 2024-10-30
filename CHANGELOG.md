@@ -3,6 +3,10 @@ Change Log
 
 All notable changes to the CsvReader will be documented in this file.
 
+## [1.1.2] - 2024-10-30
+
+* c54e241 - Fixes for PHP8.3
+
 ## [1.1.1] - 2024-03-05
 
 * a73e8e1 - Methods CsvReader::FromFile() and CsvReader::FromData() detect and skip BOM

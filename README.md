@@ -1,7 +1,7 @@
 CsvReader
 =========
 
-[![Build Status](https://travis-ci.com/atk14/CsvReader.svg?branch=master)](https://travis-ci.com/atk14/CsvReader)
+[![Build Status](https://app.travis-ci.com/atk14/CsvReader.svg?token=Kc7UxgK5oqFG8sZAhCzg&branch=master)](https://app.travis-ci.com/atk14/CsvReader)
 
 Reads CSV data from a file or a string. Detects automatically CSV format parameters.
 

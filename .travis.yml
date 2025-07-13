@@ -53,7 +53,7 @@ jobs:
         - php -v
 
 before_script:
-  - composer update --dev
+  - composer update --dev 2>&1
 
 script:
   - cd test && ../vendor/bin/run_unit_tests
